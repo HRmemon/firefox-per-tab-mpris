@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Firefox Per-Tab MPRIS",
+  "version": "1.0.0",
+  "description": "Exposes every active media tab as a separate MPRIS D-Bus player",
+  "permissions": [
+    "nativeMessaging",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox-mpris-per-tab@local"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

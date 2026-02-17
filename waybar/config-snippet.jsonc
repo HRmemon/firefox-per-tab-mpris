@@ -1,0 +1,41 @@
+// Add this module to your Waybar config (typically ~/.config/waybar/config.jsonc)
+//
+// 1. Add "custom/mpris" to your "modules-center" (or left/right) array
+// 2. Add the module definition below
+
+// In your modules array:
+// "modules-center": ["custom/mpris", ...]
+
+// Module definition:
+{
+  "custom/mpris": {
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}}\\n{{markup_escape(title)}} - {{markup_escape(artist)}}\\n{{status}}\", \"class\": \"{{lc(status)}}\"}' -F",
+    "return-type": "json",
+    "max-length": 50,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "on-scroll-up": "playerctl volume 0.05+",
+    "on-scroll-down": "playerctl volume 0.05-",
+    "escape": true
+  }
+}
+
+// Optional: Waybar CSS for styling (add to ~/.config/waybar/style.css)
+//
+// #custom-mpris {
+//     padding: 0 10px;
+//     color: #cdd6f4;
+//     background-color: #1e1e2e;
+//     border-radius: 8px;
+//     margin: 2px 4px;
+// }
+// #custom-mpris.playing {
+//     color: #a6e3a1;
+// }
+// #custom-mpris.paused {
+//     color: #f9e2af;
+// }
+// #custom-mpris.stopped {
+//     color: #6c7086;
+// }
